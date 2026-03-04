@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Applab\LaravelAzureApim\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelAzureApimCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-azure-apim';
 
     public $description = 'My command';
 
