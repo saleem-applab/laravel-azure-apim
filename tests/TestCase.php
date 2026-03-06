@@ -5,6 +5,7 @@ namespace Applab\LaravelAzureApim\Tests;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Applab\LaravelAzureApim\LaravelAzureApimServiceProvider;
+use Applab\LaravelAzureApim\Facades\Apim;
 
 class TestCase extends Orchestra
 {
@@ -21,6 +22,13 @@ class TestCase extends Orchestra
     {
         return [
             LaravelAzureApimServiceProvider::class,
+        ];
+    }
+
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Apim' => Apim::class,
         ];
     }
 

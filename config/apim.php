@@ -2,6 +2,7 @@
 
 // config for Applab/LaravelAzureApim
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Azure Service Principal Credentials
@@ -16,9 +17,9 @@ return [
     | Azure Subscription & Resource
     |--------------------------------------------------------------------------
     */
-    'subscription_id'  => env('AZURE_SUBSCRIPTION_ID'),
-    'resource_group'   => env('AZURE_RESOURCE_GROUP'),
-    'service_name'     => env('AZURE_APIM_SERVICE_NAME'),
+    'subscription_id' => env('AZURE_SUBSCRIPTION_ID'),
+    'resource_group'  => env('AZURE_RESOURCE_GROUP'),
+    'service_name'    => env('AZURE_APIM_SERVICE_NAME'),
 
     /*
     |--------------------------------------------------------------------------
@@ -32,9 +33,9 @@ return [
     | HTTP Client Settings
     |--------------------------------------------------------------------------
     */
-    'timeout'          => env('AZURE_APIM_TIMEOUT', 30),
-    'retry_times'      => env('AZURE_APIM_RETRY_TIMES', 3),
-    'retry_sleep_ms'   => env('AZURE_APIM_RETRY_SLEEP_MS', 500),
+    'timeout'        => env('AZURE_APIM_TIMEOUT', 30),
+    'retry_times'    => env('AZURE_APIM_RETRY_TIMES', 3),
+    'retry_sleep_ms' => env('AZURE_APIM_RETRY_SLEEP_MS', 500),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,4 +43,5 @@ return [
     |--------------------------------------------------------------------------
     */
     'token_cache_ttl' => env('AZURE_APIM_TOKEN_CACHE_TTL', 3500),
+
 ];

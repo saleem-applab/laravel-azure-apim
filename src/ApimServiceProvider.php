@@ -2,9 +2,6 @@
 
 namespace Applab\LaravelAzureApim;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Applab\LaravelAzureApim\Commands\LaravelAzureApimCommand;
 use Applab\LaravelAzureApim\Auth\AzureAuthService;
 use Applab\LaravelAzureApim\Http\ApimHttpClient;
 use Applab\LaravelAzureApim\Managers\ApiManager;
@@ -17,19 +14,20 @@ use Applab\LaravelAzureApim\Services\MonitorService;
 use Applab\LaravelAzureApim\Services\PolicyService;
 use Applab\LaravelAzureApim\Services\ProductService;
 use Applab\LaravelAzureApim\Services\SubscriptionService;
+use Illuminate\Support\ServiceProvider;
 
-class LaravelAzureApimServiceProvider extends PackageServiceProvider
+class ApimServiceProvider extends ServiceProvider
 {
-    public function configurePackage(Package $package): void
+    /**
+     * Register all package bindings.
+     */
+    public function register(): void
     {
-        $package
-            ->name('laravel-azure-apim')
-            ->hasConfigFile('apim')
-            ->hasCommand(LaravelAzureApimCommand::class);
-    }
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/apim.php',
+            'apim'
+        );
 
-    public function packageRegistered(): void
-    {
         // Auth & HTTP
         $this->app->singleton(AzureAuthService::class);
         $this->app->singleton(ApimHttpClient::class);
@@ -48,7 +46,19 @@ class LaravelAzureApimServiceProvider extends PackageServiceProvider
         $this->app->singleton(SubscriptionManager::class);
         $this->app->singleton(MonitorManager::class);
 
-        // Root manager (Apim facade backing)
+        // Root manager (facade backing)
         $this->app->singleton(ApimManager::class);
+    }
+
+    /**
+     * Bootstrap package services.
+     */
+    public function boot(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../config/apim.php' => config_path('apim.php'),
+            ], 'apim-config');
+        }
     }
 }
